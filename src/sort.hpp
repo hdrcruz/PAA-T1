@@ -15,6 +15,8 @@ class Sort{
     vector<int> vetor;
     long int comparacoes;
     long int trocas;
+    string algoritmo;
+    double tempo;
 
 
   public:
@@ -23,6 +25,14 @@ class Sort{
     Sort(){
       comparacoes = 0;
       trocas = 0;
+    }
+
+    void setAlgoritmo(string algoritmo){
+      this->algoritmo = algoritmo;
+    }
+
+    void setTempo(double tempo){
+      this->tempo = tempo;
     }
 
     int getSize(){
@@ -34,7 +44,7 @@ class Sort{
       int i = 0;
       srand((int)time(0));
       for(i=0;i<tamanho;i++){
-        vetor.push_back((rand() % 100) + 1);
+        vetor.push_back((rand() % tamanho) + 1);
       }
       
     }
@@ -59,14 +69,17 @@ class Sort{
       int pos_direita = meio+1;
 
       while (pos_esquerda <= meio && pos_direita <= fim){
-        if (vetor[pos_esquerda] < vetor[pos_direita])
+        comparacoes++;
+        if (vetor[pos_esquerda] <= vetor[pos_direita])
         {
+          // trocas++;
           aux[pos] = vetor[pos_esquerda];
           pos++;
           pos_esquerda++;
         }
         else
         {
+          trocas++;
           aux[pos] = vetor[pos_direita];
           pos++;
           pos_direita++;
@@ -97,15 +110,22 @@ class Sort{
       pivo = vetor[inicio + (rand() % (fim - inicio + 1))];
       
       do{
-        while (vetor[esquerda] < pivo) esquerda++;
-        while (vetor[direita] > pivo) direita--;
+        while (vetor[esquerda] < pivo){
+          comparacoes++;
+          esquerda++;
+        } 
+        while (vetor[direita] > pivo){
+          comparacoes++;
+          direita--;
+        } 
 
-        if(esquerda <= direita){
-           aux = vetor[esquerda];
-           vetor[esquerda] = vetor[direita];
-           vetor[direita] = aux;
-           esquerda++;
-           direita--;
+        if(esquerda < direita){
+          trocas++;
+          aux = vetor[esquerda];
+          vetor[esquerda] = vetor[direita];
+          vetor[direita] = aux;
+          esquerda++;
+          direita--;
         }
       }while(direita > esquerda);
 
@@ -123,15 +143,22 @@ class Sort{
       pivo = vetor[inicio];
 
       do{
-        while (vetor[esquerda] < pivo) esquerda++;
-        while (vetor[direita] > pivo) direita--;
+        while (vetor[esquerda] < pivo){
+          comparacoes++;
+          esquerda++;
+        } 
+        while (vetor[direita] > pivo){
+          comparacoes++;
+          direita--;
+        } 
 
-        if(esquerda <= direita){
-           aux = vetor[esquerda];
-           vetor[esquerda] = vetor[direita];
-           vetor[direita] = aux;
-           esquerda++;
-           direita--;
+        if(esquerda < direita){
+          trocas++;
+          aux = vetor[esquerda];
+          vetor[esquerda] = vetor[direita];
+          vetor[direita] = aux;
+          esquerda++;
+          direita--;
         }
       }while(direita > esquerda);
 
@@ -149,15 +176,22 @@ class Sort{
       pivo = vetor[fim];
 
       do{
-        while (vetor[esquerda] < pivo) esquerda++;
-        while (vetor[direita] > pivo) direita--;
+        while (vetor[esquerda] < pivo){
+          comparacoes++;
+          esquerda++;
+        } 
+        while (vetor[direita] > pivo){
+          comparacoes++;
+          direita--;
+        } 
 
-        if(esquerda <= direita){
-           aux = vetor[esquerda];
-           vetor[esquerda] = vetor[direita];
-           vetor[direita] = aux;
-           esquerda++;
-           direita--;
+        if(esquerda < direita){
+          trocas++;
+          aux = vetor[esquerda];
+          vetor[esquerda] = vetor[direita];
+          vetor[direita] = aux;
+          esquerda++;
+          direita--;
         }
       }while(direita > esquerda);
 
@@ -176,15 +210,22 @@ class Sort{
       pivo = vetor[meio];
 
       do{
-        while (vetor[esquerda] < pivo) esquerda++;
-        while (vetor[direita] > pivo) direita--;
+        while (vetor[esquerda] < pivo){
+          comparacoes++;
+          esquerda++;
+        } 
+        while (vetor[direita] > pivo){
+          comparacoes++;
+          direita--;
+        } 
 
-        if(esquerda <= direita){
-           aux = vetor[esquerda];
-           vetor[esquerda] = vetor[direita];
-           vetor[direita] = aux;
-           esquerda++;
-           direita--;
+        if(esquerda < direita){
+          trocas++;
+          aux = vetor[esquerda];
+          vetor[esquerda] = vetor[direita];
+          vetor[direita] = aux;
+          esquerda++;
+          direita--;
         }
       }while(direita > esquerda);
 
@@ -194,25 +235,45 @@ class Sort{
 
     void insertionSort()    
     {
+      int i,j,temp;
       int elementos = vetor.size();
-      int iter,jter;
-      for(iter=1;iter<elementos;iter++)
+      // int iter,jter;
+      // for(iter=1;iter<elementos;iter++)
+      // {
+      //   int elem_atual = vetor[iter];
+      //   jter = iter+1;
+      //   // comparacoes++;
+      //   while(jter>=0 && vetor[jter] > elem_atual)
+      //   {
+      //     comparacoes++;
+      //     vetor[jter+1] = vetor[jter];
+      //     trocas++;
+      //     jter--;
+      //   }
+      //   vetor[jter+1] = elem_atual;
+      // }
+      for (i = 1; i < elementos; i++)
       {
-        int elem_atual = vetor[iter];
-        jter = iter-1;
-        while(jter>=0 && vetor[jter] > elem_atual)
-        {
-          comparacoes++;
-          vetor[jter+1] = vetor[jter];
-          trocas++;
-          jter--;
-        }
-        vetor[jter+1] = elem_atual;
+          for (j = i; j >= 1; j--)
+          {
+              comparacoes++;
+              if (vetor[j] < vetor[j-1])
+              {
+                  trocas++;
+                  temp = vetor[j];
+                  vetor[j] = vetor[j-1];
+                  vetor[j-1] = temp;
+              }
+              else
+                  break;
+          }
       }
+      
     }
 
     void selectionSort()
     {
+      
       int elementos = vetor.size();
       int iter,jter,minIndex,temp;
       for(iter = 0;iter<elementos;iter++)
@@ -230,6 +291,7 @@ class Sort{
           vetor[minIndex] = temp;
           trocas++;
       }
+      
     }
 
     int readFile(char  const *arquivo){
@@ -253,6 +315,59 @@ class Sort{
         cout << n << endl;    // ****
       }
       return 0;
+    }
+
+    int saveFile(char  const *arquivo){
+      ofstream myfile (arquivo);
+      int n;
+      if (myfile.is_open()){
+        for (auto n : vetor) {      // ****
+          myfile << n << " ";    // ****
+        }
+        myfile.close();
+      }
+      
+      return 0;
+    }
+
+    int saveStats(char *arquivo){
+      ofstream myfile (arquivo);
+      if (myfile.is_open()){
+        myfile << "Algoritmo: " << algoritmo << endl;
+        myfile << "Tamanho de N: " << vetor.size() << endl;
+        myfile << "Comparacoes: " << comparacoes << endl;
+        myfile << "Trocas: " << trocas << endl;
+        myfile << "Tempo de Execucao: " << tempo << endl;
+        myfile.close();
+      }
+      
+      return 0;
+
+    }
+
+    void printStats(){
+      cout << "Tamanho de N: " << vetor.size() << endl;
+      cout << "Comparacoes: " << comparacoes << endl;
+      cout << "Trocas: " << trocas << endl;
+      cout << "Tempo de Execucao: " << tempo << endl;
+    }
+
+    void bubbleSort(){
+      
+      int elementos = vetor.size();
+      int iter, jter, aux;
+      for (iter=0; iter < elementos; iter++){
+        for (jter = iter+1; jter < elementos; jter++){
+          comparacoes++;
+          if (vetor[iter] > vetor[jter]){
+            trocas++;
+            aux = vetor[iter];
+            vetor[iter] = vetor[jter];
+            vetor[jter] = aux;
+          }
+        }
+      }
+      
     }
 
     
