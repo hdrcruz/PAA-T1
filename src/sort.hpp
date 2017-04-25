@@ -101,36 +101,40 @@ class Sort{
       }
     }
 
-    void quickSortRandom(int inicio, int fim){
+    
+
+    
+    void quickSortMedium(int inicio, int fim){
       int pivo, aux, esquerda, direita, meio;
 
       esquerda = inicio;
       direita = fim;
-      srand((int)time(0));
-      pivo = vetor[inicio + (rand() % (fim - inicio + 1))];
-      
+
+      meio = (int) ((esquerda + direita) / 2);
+      pivo = vetor[meio];
+
       do{
         while (vetor[esquerda] < pivo){
-          comparacoes++;
           esquerda++;
-        } 
+          comparacoes++;
+        }
         while (vetor[direita] > pivo){
+          direita--;
           comparacoes++;
-          direita--;
-        } 
+        }
 
-        if(esquerda < direita){
+        if(esquerda <= direita){
           trocas++;
-          aux = vetor[esquerda];
-          vetor[esquerda] = vetor[direita];
-          vetor[direita] = aux;
-          esquerda++;
-          direita--;
+           aux = vetor[esquerda];
+           vetor[esquerda] = vetor[direita];
+           vetor[direita] = aux;
+           esquerda++;
+           direita--;
         }
       }while(direita > esquerda);
 
-      if(inicio < direita) quickSortRandom(inicio, direita);
-      if(esquerda < fim) quickSortRandom(esquerda, fim);
+      if(inicio < direita) quickSortMedium(inicio, direita);
+      if(esquerda < fim) quickSortMedium(esquerda, fim);
     }
 
     void quickSortFirst(int inicio, int fim){
@@ -144,21 +148,21 @@ class Sort{
 
       do{
         while (vetor[esquerda] < pivo){
-          comparacoes++;
           esquerda++;
-        } 
+          comparacoes++;
+        }
         while (vetor[direita] > pivo){
+          direita--;
           comparacoes++;
-          direita--;
-        } 
+        }
 
-        if(esquerda < direita){
+        if(esquerda <= direita){
           trocas++;
-          aux = vetor[esquerda];
-          vetor[esquerda] = vetor[direita];
-          vetor[direita] = aux;
-          esquerda++;
-          direita--;
+           aux = vetor[esquerda];
+           vetor[esquerda] = vetor[direita];
+           vetor[direita] = aux;
+           esquerda++;
+           direita--;
         }
       }while(direita > esquerda);
 
@@ -177,60 +181,62 @@ class Sort{
 
       do{
         while (vetor[esquerda] < pivo){
-          comparacoes++;
           esquerda++;
-        } 
+          comparacoes++;
+        }
         while (vetor[direita] > pivo){
+          direita--;
           comparacoes++;
-          direita--;
-        } 
+        }
 
-        if(esquerda < direita){
+        if(esquerda <= direita){
           trocas++;
-          aux = vetor[esquerda];
-          vetor[esquerda] = vetor[direita];
-          vetor[direita] = aux;
-          esquerda++;
-          direita--;
+           aux = vetor[esquerda];
+           vetor[esquerda] = vetor[direita];
+           vetor[direita] = aux;
+           esquerda++;
+           direita--;
         }
       }while(direita > esquerda);
 
       if(inicio < direita) quickSortLast(inicio, direita);
       if(esquerda < fim) quickSortLast(esquerda, fim);
     }
-    
 
-    void quickSortMedium(int inicio, int fim){
+
+
+    void quickSortRandom(int inicio, int fim){
       int pivo, aux, esquerda, direita, meio;
 
       esquerda = inicio;
       direita = fim;
 
-      meio = (int) ((esquerda + direita) / 2);
-      pivo = vetor[meio];
+      // meio = (int) ((esquerda + direita) / 2);
+      srand((int)time(0));
+      pivo = vetor[inicio + (rand() % (fim - inicio + 1))];
 
       do{
         while (vetor[esquerda] < pivo){
-          comparacoes++;
           esquerda++;
-        } 
+          comparacoes++;
+        }
         while (vetor[direita] > pivo){
+          direita--;
           comparacoes++;
-          direita--;
-        } 
+        }
 
-        if(esquerda < direita){
+        if(esquerda <= direita){
           trocas++;
-          aux = vetor[esquerda];
-          vetor[esquerda] = vetor[direita];
-          vetor[direita] = aux;
-          esquerda++;
-          direita--;
+           aux = vetor[esquerda];
+           vetor[esquerda] = vetor[direita];
+           vetor[direita] = aux;
+           esquerda++;
+           direita--;
         }
       }while(direita > esquerda);
 
-      if(inicio < direita) quickSortMedium(inicio, direita);
-      if(esquerda < fim) quickSortMedium(esquerda, fim);
+      if(inicio < direita) quickSortRandom(inicio, direita);
+      if(esquerda < fim) quickSortRandom(esquerda, fim);
     }
 
     void insertionSort()    

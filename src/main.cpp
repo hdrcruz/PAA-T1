@@ -11,8 +11,8 @@ int main(int argc, char **argv){
   
 
   if(argc != 3){
-    cout << "UUsage: " << argv[0] << " ENTRADA" << endl;
-    return 0; //should be two arguments, exe name & file path/name
+    cout << "UUsage: " << argv[0] << " ARQUIVO-ENTRADA ARQUIVO-SAIDA" << endl;
+    return 0;
   }
 
   ordenador.readFile(argv[1]);
@@ -24,10 +24,10 @@ int main(int argc, char **argv){
   cout << "S - SelectionSort" << endl;
   cout << "I - InsertionSort" << endl;
   cout << "M - MergeSort" << endl;
-  cout << "Q - QuickSort - Pivo Medium" << endl;
-  cout << "P - QuickSort - Pivo Primeiro" << endl;
-  cout << "U - QuickSort - Pivo Ultimo" << endl;
-  cout << "A - QuickSort - Pivo Aleatorio" << endl;
+  cout << "Q - QuickSort - Pivo Elemento Mediano" << endl;
+  cout << "P - QuickSort - Pivo Primeiro Elemento" << endl;
+  cout << "U - QuickSort - Pivo Ultimo Elemento" << endl;
+  cout << "A - QuickSort - Pivo Elemento Aleatorio" << endl;
   cout << "Escolha: ";
   cin >> algoritmo;
   switch(algoritmo){
@@ -63,10 +63,43 @@ int main(int argc, char **argv){
       tempo = (double)(clock() - tStart)/CLOCKS_PER_SEC;
       cout << "Algoritmo: mergeSort" << endl;
       break;
+    case 'Q':
+    case 'q':
+      tStart = clock();
+      ordenador.setAlgoritmo("QuickSort - Mediano");
+      ordenador.quickSortMedium(0,ordenador.getSize()-1);
+      tempo = (double)(clock() - tStart)/CLOCKS_PER_SEC;
+      cout << "Algoritmo: quickSort" << endl;
+      break;
+    case 'P':
+    case 'p':
+      tStart = clock();
+      ordenador.setAlgoritmo("QuickSort - Primeiro");
+      ordenador.quickSortFirst(0,ordenador.getSize()-1);
+      tempo = (double)(clock() - tStart)/CLOCKS_PER_SEC;
+      cout << "Algoritmo: quickSort" << endl;
+      break;
+    case 'U':
+    case 'u':
+      tStart = clock();
+      ordenador.setAlgoritmo("QuickSort - Ultimo");
+      ordenador.quickSortLast(0,ordenador.getSize()-1);
+      tempo = (double)(clock() - tStart)/CLOCKS_PER_SEC;
+      cout << "Algoritmo: quickSort" << endl;
+      break;
+    case 'A':
+    case 'a':
+      tStart = clock();
+      ordenador.setAlgoritmo("QuickSort - Aleatorio");
+      ordenador.quickSortRandom(0,ordenador.getSize()-1);
+      tempo = (double)(clock() - tStart)/CLOCKS_PER_SEC;
+      cout << "Algoritmo: quickSort" << endl;
+      break;
     default:
       cout << "Seleção Inválida. Tente Novamante" << endl;
   }
   ordenador.setTempo(tempo);
+  ordenador.printData();
   ordenador.printStats();
   ordenador.saveStats(argv[2]);
   return 1;
